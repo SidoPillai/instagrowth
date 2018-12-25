@@ -4,30 +4,32 @@ from time import sleep, strftime
 from random import randint
 import pandas as pd
 
-chromedriver_path = 'Change this to your own chromedriver path'
+chromedriver_path = '/Users/siddeshpillai/Downloads/chromedriver/chromedriver'
 webdriver = webdriver.Chrome(executable_path=chromedriver_path)
 sleep(2)
 webdriver.get('https://www.instagram.com/accounts/login/?source=auth_switcher')
 sleep(3)
 
 username = webdriver.find_element_by_name('username')
-username.send_keys('your_username')
+username.send_keys('siddeshpillai')
 password = webdriver.find_element_by_name('password')
-password.send_keys('your_password')
+password.send_keys('mellowbunny16912')
 
 button_login = webdriver.find_element_by_css_selector('#react-root > section > main > div > article > div > div:nth-child(1) > div > form > div:nth-child(3) > button')
 button_login.click()
 sleep(3)
 
+#comment the following 2 lines, if you don't get a pop up asking about notifications
 notnow = webdriver.find_element_by_css_selector('body > div:nth-child(13) > div > div > div > div.mt3GC > button.aOOlW.HoLwm')
-notnow.click() #comment these last 2 lines out, if you don't get a pop up asking about notifications
+notnow.click() 
 
-hashtag_list = ['travelblog', 'travelblogger', 'traveler']
+# create a hashtag list based on your needs
+hashtag_list = ['wanderlust', 'traveler']
 
-# Uncomment the following based on your usage
-# using 1st time
-# prev_user_list = []
-# otherwise 
+# Use line 30 if you are running the script for the very first time
+prev_user_list = []
+
+# Otherwise comment out the line 30 and uncomment the following 2 lines to read users list from the file
 # prev_user_list = pd.read_csv('users_followed_list.csv', delimiter=',').iloc[:,1:2] # useful to build a user log
 # prev_user_list = list(prev_user_list['0'])
 
@@ -46,7 +48,7 @@ for hashtag in hashtag_list:
     first_thumbnail.click()
     sleep(randint(1,2))    
     try:        
-        for x in range(1,200):
+        for x in range(1,100):
             username = webdriver.find_element_by_xpath('/html/body/div[3]/div/div[2]/div/article/header/div[2]/div[1]/div[1]/h2/a').text
             
             if username not in prev_user_list:
